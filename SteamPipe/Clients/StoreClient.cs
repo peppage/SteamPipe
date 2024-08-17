@@ -25,7 +25,7 @@ namespace SteamPipe.Clients
         }
 
         /// <inheritdoc/>
-        public async Task<AppData> AppDetailsAsync(uint appId)
+        public async Task<IApiResponse<AppDetails>> AppDetailsAsync(uint appId)
         {
             Ensure.ArgumentNotZero((int)appId, nameof(appId));
 
@@ -59,7 +59,7 @@ namespace SteamPipe.Clients
                 throw new NoSuccessException(appId, "Success returned as false", System.Net.HttpStatusCode.OK);
             }
 
-            return resp.Body.Data;
+            return resp;
         }
     }
 }

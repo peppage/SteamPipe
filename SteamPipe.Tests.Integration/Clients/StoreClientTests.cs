@@ -11,7 +11,8 @@
 
                 var steam = Helper.GetAuthClient();
 
-                var appData = await steam.Store.AppDetailsAsync(440);
+                var appDataResp = await steam.Store.AppDetailsAsync(440);
+                var appData = appDataResp.Body.Data;
                 Assert.Equal("Team Fortress 2", appData.Name);
                 Assert.Equal("game", appData.Type);
                 Assert.Equal<uint>(440, appData.AppId);
@@ -27,7 +28,8 @@
             {
                 var steam = Helper.GetAuthClient();
 
-                var appData = await steam.Store.AppDetailsAsync(292030);
+                var appDataResp = await steam.Store.AppDetailsAsync(292030);
+                var appData = appDataResp.Body.Data;
                 Assert.NotNull(appData.PCRequirements);
                 Assert.Null(appData.LinuxRequirements);
                 Assert.Null(appData.MacRequirements);
@@ -38,7 +40,8 @@
             {
                 var steam = Helper.GetAuthClient();
 
-                var appData = await steam.Store.AppDetailsAsync(7740);
+                var appDataResp = await steam.Store.AppDetailsAsync(7740);
+                var appData = appDataResp.Body.Data;
                 Assert.Equal("advertising", appData.Type);
             }
 
@@ -60,7 +63,8 @@
             public async Task Film()
             {
                 var steam = Helper.GetAuthClient();
-                var appData = await steam.Store.AppDetailsAsync(207080);
+                var appDataResp = await steam.Store.AppDetailsAsync(207080);
+                var appData = appDataResp.Body.Data;
                 Assert.Equal("game", appData.Type);
                 Assert.Equal("Indie Game: The Movie", appData.Name);
             }

@@ -17,6 +17,6 @@ namespace SteamPipe.Clients
         /// Throw when the call succeeds but success is false, it's still an error.
         /// </exception>
         /// <returns>The details about an app</returns>
-        Task<AppData> AppDetailsAsync(uint appId);
+        Task<IApiResponse<AppDetails>> AppDetailsAsync(uint appId);
     }
 }
