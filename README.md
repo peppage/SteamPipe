@@ -1,4 +1,5 @@
 # SteamPipe - Steam API Client Library for .NET
+[![NuGet](https://img.shields.io/nuget/v/steampipe.svg)](https://www.nuget.org/packages/steampipe/)
 
 This is a simple library for accessing the Steam API.
 
