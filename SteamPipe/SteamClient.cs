@@ -44,6 +44,7 @@ namespace SteamPipe
             _httpClient = httpClient;
 
             Store = new StoreClient(_httpClient, BaseStoreAddress);
+            Api = new ApiClient(_httpClient, string.Empty, SteamApiUrl);
         }
 
         /// <inheritdoc/>
