@@ -33,18 +33,29 @@ namespace SteamPipe
         }
 
         /// <summary>
+        /// Create a new instance of the Steam API client with an API key.
+        /// </summary>
+        /// <param name="apiKey"></param>
+        public SteamClient(string apiKey) : this(new HttpClient(new ThrottlingMessageHandler(new TimeSpanSemaphore(1, TimeSpan.FromMilliseconds(SafeDelayBetweenCalls)))), apiKey)
+        {
+        }
+
+        /// <summary>
         /// Create a new instance of the Steam API client that doesn't need an
         /// API key but you want to specify your own <see cref="HttpClient"/>
         /// </summary>
         /// <param name="httpClient">Client to make requests through</param>
-        public SteamClient(HttpClient httpClient)
+        /// <param name="apiKey">Steam API key, can be set later with <see cref="SetApiKey(string)"/></param>
+        public SteamClient(HttpClient httpClient, string apiKey = "")
         {
             Ensure.ArgumentNotNull(httpClient, nameof(httpClient));
 
             _httpClient = httpClient;
+            ApiKey = apiKey;
 
             Store = new StoreClient(_httpClient, BaseStoreAddress);
-            Api = new ApiClient(_httpClient, string.Empty, SteamApiUrl);
+            Api = new ApiClient(_httpClient, apiKey, SteamApiUrl);
+            Community = new CommunityClient(_httpClient, SteamCommunityApiUrl);
         }
 
         /// <inheritdoc/>
@@ -77,6 +88,7 @@ namespace SteamPipe
             Api = new ApiClient(_httpClient, ApiKey, SteamApiUrl);
         }
 
+        /// <inheritdoc/>
         public void SetBaseApiAddress(string baseApiAddress)
         {
             var uri = new Uri(baseApiAddress);
@@ -90,6 +102,7 @@ namespace SteamPipe
             Store = new StoreClient(_httpClient, SteamStoreApiUrl);
         }
 
+        /// <inheritdoc/>
         public void SetBaseStoreAddress(string storeAddress)
         {
             var uri = new Uri(storeAddress);

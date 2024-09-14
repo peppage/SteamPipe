@@ -12,6 +12,14 @@
                 client.SetApiKey(key);
                 Assert.Same(key, client.ApiKey);
             }
+
+            [Fact]
+            public void ApiKeyIsSavedWhenPassedInConstructor()
+            {
+                const string key = "asedf";
+                var client = new SteamClient(key);
+                Assert.Same(key, client.ApiKey);
+            }
         }
 
         public class TheBaseAddressProperty

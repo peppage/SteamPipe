@@ -33,10 +33,23 @@ namespace SteamPipe
         /// </summary>
         IApiClient Api { get; }
 
+
+        /// <summary>
+        /// Set the API key to use for API requests
+        /// </summary>
+        /// <param name="apiKey"></param>
         void SetApiKey(string apiKey);
 
+        /// <summary>
+        /// Override the base address for the Steam API
+        /// </summary>
+        /// <param name="baseApiAddress"></param>
         void SetBaseApiAddress(string baseApiAddress);
 
+        /// <summary>
+        /// Override the base address for the Steam Store API
+        /// </summary>
+        /// <param name="storeAddress"></param>
         void SetBaseStoreAddress(string storeAddress);
     }
 }
