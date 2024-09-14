@@ -18,5 +18,23 @@ namespace SteamPipe.Internal
             var response = new Response(responseMessage.StatusCode, responseBody, responseHeaders);
             return JsonDeserializer.DeserializeResponse<T>(response);
         }
+
+        public static async Task<string> GetSessionIdAsync(this HttpClient httpClient, Uri url)
+        {
+            var response = await httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            if (response.Headers.TryGetValues("Set-Cookie", out var cookies))
+            {
+                var sessionIdCookie = cookies.FirstOrDefault(x => x.Contains("sessionid"));
+                if (sessionIdCookie != null)
+                {
+                    var sessionIdValue = sessionIdCookie.Split(';')[0].Trim().Split('=')[1];
+                    return sessionIdValue;
+                }
+            }
+
+            throw new InvalidOperationException("Session ID cookie not found in the response.");
+        }
     }
 }

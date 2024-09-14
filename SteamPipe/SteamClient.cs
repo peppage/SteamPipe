@@ -23,6 +23,12 @@ namespace SteamPipe
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "Not changing, default for Valve")]
         public Uri SteamStoreApiUrl { get; private set; } = new Uri("https://store.steampowered.com/");
 
+        /// <summary>
+        /// The default URL for the Steam community API
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "Not changing, default for Valve")]
+        public Uri SteamCommunityApiUrl { get; private set; } = new Uri("https://steamcommunity.com/");
+
         private const int SafeDelayBetweenCalls = 1500;
 
         /// <summary>
@@ -72,6 +78,9 @@ namespace SteamPipe
 
         /// <inheritdoc/>
         public IApiClient Api { get; private set; }
+
+        /// <inheritdoc/>
+        public ICommunityClient Community { get; private set; }
 
         private readonly HttpClient _httpClient;
 

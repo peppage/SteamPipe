@@ -33,6 +33,10 @@ namespace SteamPipe
         /// </summary>
         IApiClient Api { get; }
 
+        /// <summary>
+        /// Access community API
+        /// </summary>
+        ICommunityClient Community { get; }
 
         /// <summary>
         /// Set the API key to use for API requests
